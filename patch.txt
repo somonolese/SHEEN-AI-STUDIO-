@@ -1,0 +1,42 @@
+--- /app/applet/components/FullscreenGallery.tsx
++++ /app/applet/components/FullscreenGallery.tsx
+@@ -163,16 +163,22 @@
+   const [currentIndex, setCurrentIndex] = useState(initialIndex);
+   
+   const scrollHandler = useAnimatedScrollHandler({
+     onScroll: (event) => {
+       scrollX.value = event.contentOffset.x;
+     },
+     onMomentumEnd: (event) => {
+       runOnJS(setCurrentIndex)(Math.round(event.contentOffset.x / windowWidth));
+     }
+   });
+ 
+   React.useEffect(() => {
+     const sub = BackHandler.addEventListener('hardwareBackPress', () => {
+       onClose();
+       return true;
+     });
+     return () => sub.remove();
+   }, [onClose]);
+ 
+   const scrollViewRef = useRef<Animated.ScrollView>(null);
++  const [hasScrolled, setHasScrolled] = useState(false);
++
++  const handleLayout = () => {
++    if (!hasScrolled && scrollViewRef.current) {
++      scrollViewRef.current.scrollTo({ x: initialIndex * windowWidth, animated: false });
++      setHasScrolled(true);
++    }
++  };
+ 
+   // Use a slight delay or directly pass contentOffset to scroll to initial index
+   // However, contentOffset in Reanimated ScrollView sometimes doesn't work perfectly on Android
+@@ -188,6 +194,7 @@
+             horizontal
+             pagingEnabled
+             showsHorizontalScrollIndicator={false}
++            onLayout={handleLayout}
+             onScroll={scrollHandler}
+             scrollEventThrottle={16}
+           >

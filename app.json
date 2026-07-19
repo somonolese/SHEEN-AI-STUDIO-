@@ -1,0 +1,65 @@
+{
+  "expo": {
+    "name": "SHEEN",
+    "slug": "sheen",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/images/icon.png",
+    "scheme": "sheen",
+    "userInterfaceStyle": "automatic",
+    "newArchEnabled": true,
+    "splash": {
+      "image": "./assets/images/icon.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#0A0E0F"
+    },
+    "ios": {
+      "supportsTablet": false,
+      "icon": "./assets/images/icon.png",
+      "bundleIdentifier": "com.sheen.store",
+      "associatedDomains": ["applinks:sheen.store"]
+    },
+    "android": {
+      "package": "com.sheen.store",
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/images/icon.png",
+        "backgroundColor": "#F5ECD9"
+      },
+      "notification": {
+        "icon": "./assets/images/icon.png",
+        "color": "#006874"
+      },
+      "intentFilters": [
+        {
+          "action": "VIEW",
+          "autoVerify": true,
+          "data": [
+            {
+              "scheme": "https",
+              "host": "sheen.store",
+              "pathPrefix": "/app"
+            }
+          ],
+          "category": ["BROWSABLE", "DEFAULT"]
+        }
+      ]
+    },
+    "web": {
+      "favicon": "./assets/images/icon.png"
+    },
+    "plugins": [
+      [
+        "expo-router",
+        {
+          "origin": "https://replit.com/"
+        }
+      ],
+      "expo-font",
+      "expo-web-browser"
+    ],
+    "experiments": {
+      "typedRoutes": true,
+      "reactCompiler": true
+    }
+  }
+}

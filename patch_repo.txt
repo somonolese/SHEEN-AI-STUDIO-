@@ -1,0 +1,15 @@
+--- /app/applet/lib/repositories/RepositoryRegistry.ts
++++ /app/applet/lib/repositories/RepositoryRegistry.ts
+@@ -21,11 +21,11 @@
+ export function defaultRepositories(): Repository[] {
+   return [
+     {
+       id: 'fdroid-official',
+       name: 'F-Droid Official',
+       type: 'fdroid',
+       url: 'https://f-droid.org/repo/index-v1.json',
+-      enabled: true,
++      enabled: false, // Disabled by default due to 54MB index size causing OOM or proxy limits
+       priority: 10,
+     },
+     {

@@ -1,0 +1,17 @@
+--- /app/applet/components/FullscreenGallery.tsx
++++ /app/applet/components/FullscreenGallery.tsx
+@@ -165,6 +165,14 @@
+     }
+   });
+ 
++  React.useEffect(() => {
++    const sub = BackHandler.addEventListener('hardwareBackPress', () => {
++      onClose();
++      return true;
++    });
++    return () => sub.remove();
++  }, [onClose]);
++
+   const scrollViewRef = useRef<Animated.ScrollView>(null);
+ 
+   // Use a slight delay or directly pass contentOffset to scroll to initial index

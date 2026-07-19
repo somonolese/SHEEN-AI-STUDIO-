@@ -1,0 +1,25 @@
+--- /app/applet/lib/services/Network.ts
++++ /app/applet/lib/services/Network.ts
+@@ -48,12 +48,22 @@
+   ) {
+     super(message);
+     this.name = 'NetworkError';
+   }
+ }
+ 
+ export async function fetchJson<T>(url: string, init?: RequestInit): Promise<T> {
+   const response = await fetchWithRetry(url, init);
++  
++  const contentType = response.headers.get('content-type') || '';
++  if (contentType.includes('text/html')) {
++     throw new NetworkError(`CORS proxy failed or endpoint returned HTML instead of JSON for ${url}`, response.status, url);
++  }
++
+   try {
+     const text = await response.text();
+     return JSON.parse(text) as T;
+   } catch (e) {
+-    console.error("JSON parse error:", e); throw new NetworkError(`Failed to parse JSON from ${url}: ${(e as Error).message}`, response.status, url);
++    throw new NetworkError(`Failed to parse JSON from ${url}: ${(e as Error).message}`, response.status, url);
+   }
+ }

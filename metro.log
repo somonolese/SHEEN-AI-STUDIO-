@@ -1,0 +1,7 @@
+
+> @workspace/sheen@0.0.0 dev
+> node server/dev-proxy.js
+
+Starting Expo web dev server on port 8082 (this may take a moment)...
+Expo web dev server is ready
+[server] error: listen EADDRINUSE: address already in use 0.0.0.0:8080

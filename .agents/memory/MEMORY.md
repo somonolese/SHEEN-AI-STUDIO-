@@ -1,0 +1,6 @@
+- [Shared settings state](shared-settings-state.md) — settings that affect many screens (e.g., typography) must live in a React context/provider, not in a hook with local state per consumer, or updates won't propagate.
+- [Global typography with ThemedText](global-typography-themetext.md) — wrapping Text with a ThemedText component is a clean way to apply dynamic fonts app-wide, but it must respect explicit fontFamily and derive weight from fontWeight to avoid downgrading styles.
+- [Font packages in Expo](expo-font-loading.md) — load all font variants in the root layout and map them to a single `useTypography` hook so every screen can switch fonts from one settings toggle.
+- [Branding an icon that has a baked-in solid background](icon-baked-background.md) — a source app-icon PNG with no alpha channel needs its background floodfilled transparent before reuse as an in-app logo, plus a separate opaque flatten for iOS.
+- [Replit .replit edits](replit-dot-replit-edits.md) — direct edits to .replit are blocked; use `verifyAndReplaceDotReplit` with a temp file so the platform validates the change.
+- [SHEEN web preview CORS](sheen-web-preview-cors.md) — the web preview needs a same-origin CORS proxy for F-Droid/Izzy/GitHub; keep the allow-list small and use `proxyUrl()` on web.
